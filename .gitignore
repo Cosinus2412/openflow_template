@@ -1,0 +1,15 @@
+openlane_run
+runs
+__pycache__
+sim_build
+chip_tapeout.gds
+open-flow/tapeout/rom/macro/
+open-flow/tapeout/rom/*.bin
+sysroot/
+build/
+ex2/sw/program0.*
+ex2/sw/program1.*
+*-openlane
+ex1/src/*.v
+ex2/src/*.v
+core

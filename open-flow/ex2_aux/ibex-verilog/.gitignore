@@ -1,0 +1,9 @@
+ibex_out/
+sim_build/
+slpp_all/
+__pycache__
+*.o
+*.elf
+*.vmem
+*.bin
+build/
