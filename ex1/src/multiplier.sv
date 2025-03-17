@@ -1,3 +1,4 @@
+/* verilator lint_off MULTITOP */
 module multiplier (
     input  logic clk_i,                  // Clock input
     input  logic reset_i,                // Active-high synchronous reset
@@ -44,7 +45,7 @@ typedef enum  {
             state_n = DONE;
         end
         DONE: begin
-            state_n = IDLE;  
+            state_n = IDLE;
         end
     endcase
 
@@ -70,3 +71,5 @@ always_ff @(posedge clk_i or negedge reset_i) begin
  assign done_o = (state_p == DONE);
 
  endmodule
+
+ /* verilator lint_on MULTITOP */

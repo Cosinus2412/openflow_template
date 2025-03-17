@@ -41,6 +41,9 @@ SW_BIN = ex2/sw/$(PROGRAM)/build/$(PROGRAM).bin
 EX1_SRCS = ex1/src/cipher_pkg.sv \
            $(filter-out ex1/src/cipher_pkg.sv, $(wildcard ex1/src/*.sv))
 
+
+EX1_CIPHER = $(filter-out ex1/src/cipher_pkg.sv, $(filter-out ex1/src/cipher_wrapper_ex1.sv, $(EX1_SRCS)))
+
 # Sources for ex2/, cipher_core from ex1 is included
 EX2_SRCS = ex1/src/cipher_pkg.sv \
            $(wildcard ex2/src/*.sv)
@@ -111,7 +114,7 @@ klayout: $(XAUTH)
 # lint ex1
 ex1-lint:
 	$(DOCKERCOMMAND) \
-	$(BASH) 'verilator --lint-only ${EX1_SRCS} && echo "No errors found!" || echo "Found errors!" ' 
+	$(BASH) 'verilator --lint-only -Wno-MULTITOP ${EX1_SRCS} && echo "No errors found!" || echo "Found errors!" ' 
 
 #------------------------------------------------------------------------------
 # Simulate ex1 with cocotb
@@ -121,7 +124,7 @@ ex1-cocotb-counter:
 	$(BASH) 'cd ex1/tb/ && python3 tb_counter.py'
 
 ex1-cocotb:
-	$(DOCKERCOMMAND) \
+	MODULE=$(MODULE) $(DOCKERCOMMAND) \
 	$(BASH) 'cd ex1/tb/ && python3 tb_cocotb.py'
 
 #------------------------------------------------------------------------------
